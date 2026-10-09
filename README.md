@@ -27,7 +27,7 @@ npm run test       # run the test suite
 │   ├── validators/                # Request validation (TaskValidator)
 │   ├── middlewares/               # Param validation, 404 & error handlers
 │   ├── controllers/               # Request handlers (TaskController)
-│   ├── routes/                    # Route definitions (TaskRoute)
+│   ├── routes/                    # Route definitions (TaskRoutes)
 │   └── utils/                     # Shared helpers
 └── test/                          # Test suite
 ```
