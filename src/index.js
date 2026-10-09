@@ -1,5 +1,7 @@
 const express = require('express');
 const {cEnv} = require("./consts/env.const");
+const TaskRoutes = require('./routes/task.routes');
+const ErrorMiddleware = require('./middlewares/error.middleware');
 
 
 const app = express();
@@ -17,6 +19,9 @@ app.use((req, res, next) => {
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// ── Routes ──────────────────────────────────────────────────────────────────
+app.use("/tasks", TaskRoutes.instance.router);
 
 // ── Errors (must be last) ───────────────────────────────────────────────────
 app.use(ErrorMiddleware.instance.notFound);
