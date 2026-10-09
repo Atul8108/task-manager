@@ -3,6 +3,9 @@ const seed = require("../../../task.json");
 /** @typedef {import("../../interfaces/task.interface").iTask} iTask */
 /** @typedef {import("../../interfaces/task.interface").iTaskInput} iTaskInput */
 
+// Only these fields may come from input; id is always generated/kept by the db.
+const pickFields = ({ title, description, completed }) => ({ title, description, completed });
+
 // In-memory "database" for tasks. Plays the same role as a Mongo model in db/mongo/.
 class TaskDb {
     static instance = new TaskDb();
@@ -28,7 +31,7 @@ class TaskDb {
 
     /** @param {iTaskInput} data @returns {iTask} */
     create(data) {
-        const task = { id: this.nextId++, ...data };
+        const task = { id: this.nextId++, ...pickFields(data) };
         this.tasks.push(task);
         return task;
     }
@@ -37,7 +40,7 @@ class TaskDb {
     updateById(id, data) {
         const task = this.findById(id);
         if (!task) return null;
-        Object.assign(task, data);
+        Object.assign(task, pickFields(data));
         return task;
     }
 

@@ -27,11 +27,4 @@ app.use("/tasks", TaskRoutes.instance.router);
 app.use(ErrorMiddleware.instance.notFound);
 app.use(ErrorMiddleware.instance.handle);
 
-app.listen(cEnv.PORT, (err) => {
-    if (err) {
-        return console.log("Something bad happened", err);
-    }
-    console.log(`Server is listening on ${cEnv.PORT}`);
-});
-
 module.exports = app;
